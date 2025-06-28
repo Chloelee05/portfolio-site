@@ -1,0 +1,18 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <img src="{{ url_for('static', filename='img/profile.jpg') }}" alt="Profile" class="profile-img">
+  <h2>Hello, I’m Lee Chloe</h2>
+  <p>Python Developer & Data Analyst based in Singapore.</p>
+</section>
+
+<section class="skills">
+  <h3>Key Skills</h3>
+  <ul class="skill-list">
+    <li>Python · Flask · SQL</li>
+    <li>Data Analysis · Pandas · matplotlib</li>
+    <li>Web Scraping · Selenium</li>
+  </ul>
+</section>
+{% endblock %}

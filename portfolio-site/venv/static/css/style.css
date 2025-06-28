@@ -1,0 +1,67 @@
+/* static/css/style.css */
+
+/* 기본 리셋 & 컨테이너 */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+.container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+/* 타이포그래피 */
+body {
+  font-family: 'Inter', sans-serif;  /* 모던한 본문 */
+  color: #333;
+  line-height: 1.6;
+}
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif; /* 클래식한 제목 */
+  margin-bottom: 0.5rem;
+  color: #111;
+}
+
+/* 헤더 */
+.site-header {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  padding: 1rem 0;
+}
+.site-header a {
+  text-decoration: none;
+  color: #111;
+  margin-right: 1.5rem;
+}
+
+/* Hero 섹션 */
+.hero {
+  text-align: center;
+  padding: 2rem 0;
+}
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+/* 스킬 리스트 */
+.skills {
+  margin-top: 2rem;
+}
+.skill-list {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.skill-list li {
+  background: #f9f9f9;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+/* 푸터 */
+.site-footer {
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  color: #666;
+  border-top: 1px solid #eee;
+}
