@@ -36,7 +36,7 @@ h1, h2, h3 {
 .profile-img {
   width: 300px;
   height: 350px;
-  border-radius: 0%;
+  border-radius: 5%;
   object-fit: cover;
   margin-bottom: 1rem;
 }
