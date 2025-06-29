@@ -1,18 +1,46 @@
-<!-- templates/index.html -->
 {% extends "base.html" %}
 {% block content %}
-<section class="hero">
-  <img src="{{ url_for('static', filename='img/profile.jpg') }}" alt="Profile" class="profile-img">
-  <h2>Hello, I’m Lee Chloe</h2>
-  <p>Python Developer & Data Analyst based in Singapore.</p>
+
+<!-- Hero Section -->
+<section class="hero text-center py-16">
+  <img src="{{ url_for('static', filename='img/profile.jpg') }}" alt="Profile" class="profile-img mb-6 rounded-full shadow-lg" />
+  <h2 class="text-4xl font-serif font-bold mb-2">Hello, I'm Lee Hae Eun (Chloe)</h2>
+  <p class="text-lg font-sans text-gray-700">Backend Developer Crafting Elegant Web Experiences</p>
 </section>
 
-<section class="skills">
-  <h3>Key Skills</h3>
-  <ul class="skill-list">
-    <li>Python · Flask · SQL</li>
-    <li>Data Analysis · Pandas · matplotlib</li>
-    <li>Web Scraping · Selenium</li>
-  </ul>
+<!-- Technical Proficiencies -->
+<section class="skills py-12 bg-gray-50">
+  <div class="container">
+    <h2 class="text-3xl font-serif font-semibold mb-4">Technical Proficiencies</h2>
+    <ul class="skill-list">
+      <li class="px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-sm">Python</li>
+      <li class="px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-sm">Flask</li>
+      <li class="px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-sm">JavaScript</li>
+      <li class="px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-sm">React</li>
+      <li class="px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-sm">SQL</li>
+      <li class="px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-sm">Git</li>
+    </ul>
+  </div>
 </section>
+
+<!-- Selected Projects -->
+<section class="projects py-12">
+  <div class="container">
+    <h2 class="text-3xl font-serif font-semibold mb-4">Selected Projects</h2>
+    <ul class="space-y-4 list-disc list-inside">
+      <li>
+        <a href="/projects/project1" class="text-xl font-sans text-blue-600 hover:underline">
+          Project One
+        </a> — Designed and implemented a RESTful API using Flask.
+      </li>
+      <li>
+        <a href="/projects/project2" class="text-xl font-sans text-blue-600 hover:underline">
+          Project Two
+        </a> — Integrated a React front-end with a Flask back-end.
+      </li>
+      <!-- Replace with actual project entries -->
+    </ul>
+  </div>
+</section>
+
 {% endblock %}
