@@ -81,3 +81,296 @@ h1, h2, h3 {
   position: relative;
   z-index: 1;
 }
+
+/* Container */
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 1rem;
+  min-height: 80vh;
+  background: #f9f9f9;
+}
+
+/* Form */
+.contact-form {
+  background: #ffffff;
+  border: 1px solid #e2e2e2;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  font-family: 'Inter', sans-serif;
+}
+
+.contact-form textarea {
+  resize: none;       /* 사용자가 드래그해서 크기 조절 불가 */
+}
+
+/* Heading */
+.contact-form h2 {
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+/* Labels & Inputs */
+.contact-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  transition: border-color .2s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #888;
+}
+
+/* Button */
+.contact-form button {
+  display: block;
+  width: 100%;
+  padding: 0.85rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color .2s;
+}
+
+.contact-form button:hover {
+  background-color: #555;
+}
+
+/* Flash container 위치 */
+#flash-container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+}
+
+/* 공통 스타일 */
+.notification {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 280px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  background: #fff;
+  border-left: 4px solid;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: 'Inter', sans-serif;
+}
+
+/* 카테고리별 컬러 */
+.notification.success { border-color: #28a745; }
+.notification.danger  { border-color: #dc3545; }
+
+/* 메시지 텍스트 */
+.notification .message {
+  flex: 1;
+  margin-right: 0.5rem;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+/* 닫기 버튼 */
+.notification .close-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #888;
+  padding: 0;
+}
+.notification .close-btn:hover {
+  color: #444;
+}
+
+/* 폼 배경 & 둥근 모서리 & 그림자 */
+.contact-form {
+  background: #ffffff;
+  border: 1px solid #e2e2e2;
+  border-radius: 16px;           /* 모서리 둥글게 */
+  padding: 2rem;                 /* 내부 여백 */
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);  /* 부드러운 그림자 */
+  font-family: 'Inter', sans-serif;
+}
+
+/* 폼 상단 노트 */
+.form-note {
+  background: #f5f5f5;
+  border-left: 4px solid #888;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+/* 버튼 스타일 조정 (선택) */
+.contact-form button {
+  background-color: #333;
+  border-radius: 8px;
+  padding: 0.85rem;
+  font-size: 1rem;
+  transition: background-color .2s, transform .1s;
+}
+.contact-form button:hover {
+  background-color: #555;
+  transform: translateY(-1px);
+}
+
+/* ── contact 섹션 뒤에 부드러운 둥근 배경 넣기 ── */
+.contact {
+  position: relative;
+  padding: 4rem 1rem;    /* 기존 여백 유지 */
+  overflow: hidden;      /* pseudo-element가 튀어나오지 않도록 */
+}
+
+
+/* ── Contact 섹션: 세로 정렬 + 투명 배경 ── */
+.contact {
+  position: relative;
+  display: flex;
+  flex-direction: column;    /* ← 세로 정렬 */
+  align-items: center;       /* 가운데 정렬 */
+  padding: 4rem 1rem;
+  background: transparent;   /* ← 배경 제거 */
+  overflow: visible;
+  gap: 2rem;                 /* 폼과 디테일 사이 간격 */
+}
+
+/* 폼과 프로필 박스 너비 통일 */
+.contact-form,
+.profile-details {
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Connect with Me 박스와 폼 사이 마진 */
+.profile-details {
+  margin-top: 0;  /* gap으로 간격 조절됨 */
+}
+
+/* 필요시 .site-content(메인 컨테이너) 배경도 투명 처리 */
+.site-content {
+  background: transparent !important;
+}
+
+/* ── Connect with Me 카드 스타일 ── */
+.profile-details {
+  background: #ffffff;                     /* 흰색 배경 */
+  border: 1px solid #e2e2e2;               /* 연한 테두리 */
+  border-radius: 16px;                     /* 모서리 둥글게 */
+  padding: 2rem;                           /* 여유 있는 패딩 */
+  max-width: 600px;                        /* 폼과 동일 폭 */
+  width: 100%;
+  margin: 2rem auto 0;                     /* 폼 아래에 간격 두고 가운데 정렬 */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);  /* 부드러운 그림자 */
+  font-family: 'Inter', sans-serif;
+}
+
+/* 제목 간격 */
+.profile-details h2 {
+  margin-bottom: 1rem;
+}
+
+/* 리스트 레이아웃 & 불릿 제거 */
+.details-list {
+  list-style: none;        /* 불릿 제거 */
+  padding-left: 0;         /* 들여쓰기 제거 */
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* 각 항목 레이블 고정폭 + 정렬 */
+.details-list li {
+  display: flex;
+  align-items: center;
+}
+.details-list li strong {
+  width: 6rem;             /* 레이블 고정폭 */
+  color: #555;
+  flex-shrink: 0;
+}
+
+/* 링크 스타일 */
+.details-list a {
+  color: #0066cc;
+  text-decoration: none;
+}
+.details-list a:hover {
+  text-decoration: underline;
+}
+
+/* ── 파일 입력 커스텀 ── */
+.file-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+/* 숨겨서 label이 버튼 역할 */
+.file-input-wrapper input[type="file"] {
+  display: none;
+}
+
+/* 클래식·모던 버튼 스타일 */
+.file-input-button {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background-color: #333;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color .2s, transform .1s;
+}
+
+.file-input-button:hover {
+  background-color: #555;
+  transform: translateY(-1px);
+}
+
+/* 파일명 텍스트 스타일 */
+#file-name {
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+

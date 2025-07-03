@@ -12,15 +12,15 @@ const particleOptions = {
     opacity: { value: 0.6, random: { enable: true, minimumValue: 0.3 }, animation: { enable: true, speed: 0.5, minimumValue: 0.3, sync: false } },
     size: { value: { min: 1, max: 3 }, random: true, animation: { enable: true, speed: 3, minimumValue: 1, sync: false } },
     move: { enable: true, speed: 0.8, direction: 'none', outModes: { default: 'bounce' } },
-    links: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 }
+    links: { enable: true, distance: 150, color: '#ffffff', opacity: 0.8, width: 1 }
   },
   interactivity: {
     events: {
-      onHover: { enable: true, mode: 'connect' },
+      onHover: { enable: true, mode: 'grab' },
       onClick: { enable: false }
     },
     modes: {
-      connect: { distance: 200, links: { opacity: 0.6, width: 1 } }
+      connect: { distance: 1000, links: { opacity: 1, width: 1 } }
     }
   },
   detectRetina: true

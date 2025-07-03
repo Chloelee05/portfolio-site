@@ -19,15 +19,26 @@
 
 <body>
   <div id="particles-root"></div>
-
+  <div id="flash-container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, msg in messages %}
+        <div class="notification {{ category }}">
+          <span class="message">{{ msg }}</span>
+          <button class="close-btn">&times;</button>
+        </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
   <header class="site-header">
     <div class="container">
       <h1><a href="/">Lee Hae Eun (Chloe)</a></h1>
       <nav>
-        <a href="/">Home</a>
-        <a href="#">Projects</a>
-        <a href="#">Resume</a>
-        <a href="#">Contact</a>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('projects') }}">Projects</a>
+        <a href="{{ url_for('resume') }}">Resume</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
       </nav>
     </div>
   </header>
@@ -43,5 +54,16 @@
   </footer>
 
   <script src="{{ url_for('static', filename='js/main.f082400e.js') }}"></script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('#flash-container .notification').forEach(el => {
+      // 닫기 버튼
+      el.querySelector('.close-btn').addEventListener('click', () => el.remove());
+      // 5초 후 자동 제거
+      setTimeout(() => el.remove(), 5000);
+    });
+  });
+  </script>
 </body>
 </html>
