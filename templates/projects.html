@@ -1,13 +1,175 @@
-<!-- templates/projects.html -->
 {% extends "base.html" %}
 
 {% block content %}
-  <section class="projects">
-    <h2>My Projects</h2>
-    <ul>
-      <li>Project A: 간단한 설명을 여기에 입력하세요.</li>
-      <li>Project B: 간단한 설명을 여기에 입력하세요.</li>
-      <li>Project C: 간단한 설명을 여기에 입력하세요.</li>
-    </ul>
-  </section>
+<section class="projects">
+  <h2>My Projects</h2>
+
+  <!-- Kmong  -->
+  <div class="project-category">
+    <h3>Kmong - Freelance Projects</h3>
+    <div class="project-grid">
+      <a href="projects/web-crawler" class="project-card">
+        <h4>Web Crawler</h4>
+        <p>Automatically crawls massive amount of data from certain website by using Python, Selenium, BeautifulSoup and other technologies.</p>
+        <ul class="tech-list">
+          <li>Python</li>
+          <li>BeautifulSoup</li>
+          <li>Json</li>
+          <li>Selenium</li>
+        </ul>
+      </a>
+      <a href="projects/automised-stock-analysis" class="project-card">
+        <h4>Automised Stock Analysis Software</h4>
+        <p>Automated Stock Analysis for korean stock market and outputs excel sheet for further analysis.</p>
+        <ul class="tech-list">
+          <li>Python</li>
+          <li>pykrx</li>
+          <li>Matplotlib</li>
+          <li>Mplfinance</li>
+        </ul>
+      </a>
+      <a href="projects/real-estate-crawler" class="project-card">
+        <h4>Real Estate Data Cralwer</h4>
+        <p>Automated program of collecting Real-estate data.</p>
+        <ul class="tech-list">
+          <li>Python</li>
+          <li>Selenium</li>
+          <li>Json</li>
+          <li>BeautifulSoup</li>
+        </ul>
+      </a>
+    </div>
+  </div>
+
+  <!-- Cybersecurity -->
+  <div class="project-category">
+    <h3>Cybersecurity</h3>
+    <div class="project-grid">
+      <a href="/projects/network-vuln-scanner" class="project-card">
+        <h4>Network Vulnerability Scanner</h4>
+        <p>Scans local networks, detects open ports, and generates detailed vulnerability reports.</p>
+        <ul class="tech-list">
+          <li>Python</li>
+          <li>Scapy</li>
+          <li>Nmap</li>
+        </ul>
+      </a>
+      <a href="/projects/web-pen-test-tool" class="project-card">
+        <h4>Web Penetration Testing Tool</h4>
+        <p>Automated OWASP Top 10 scans with a summary dashboard.</p>
+        <ul class="tech-list">
+          <li>Python</li>
+          <li>Selenium</li>
+          <li>Django</li>
+        </ul>
+      </a>
+    </div>
+  </div>
+
+  <!-- Data Analysis -->
+  <div class="project-category">
+    <h3>Data Analysis</h3>
+    <div class="project-grid">
+      <a href="/projects/real-time-log-analytics" class="project-card">
+        <h4>Real-time Log Analytics</h4>
+        <p>Kafka → Spark Streaming → Elasticsearch pipeline for real-time log insights.</p>
+        <ul class="tech-list">
+          <li>Kafka</li>
+          <li>Spark Streaming</li>
+          <li>Elasticsearch</li>
+        </ul>
+      </a>
+      <a href="/projects/trade-forecast-model" class="project-card">
+        <h4>Trade Forecast Model</h4>
+        <p>Time series forecasting of transaction volumes using R and AWS EMR.</p>
+        <ul class="tech-list">
+          <li>R</li>
+          <li>forecast</li>
+          <li>AWS EMR</li>
+        </ul>
+      </a>
+    </div>
+  </div>
+
+  <!-- Backend -->
+  <div class="project-category">
+    <h3>Backend</h3>
+    <div class="project-grid">
+      <a href="/projects/flask-rest-api" class="project-card">
+        <h4>Flask RESTful API</h4>
+        <p>CRUD API server with JWT authentication and PostgreSQL integration.</p>
+        <ul class="tech-list">
+          <li>Flask</li>
+          <li>PostgreSQL</li>
+          <li>JWT</li>
+        </ul>
+      </a>
+      <a href="/projects/graphql-service" class="project-card">
+        <h4>GraphQL Service</h4>
+        <p>Efficient data fetching with Node.js and Apollo Server.</p>
+        <ul class="tech-list">
+          <li>Node.js</li>
+          <li>Apollo Server</li>
+          <li>MongoDB</li>
+        </ul>
+      </a>
+    </div>
+  </div>
+
+  <!-- Frontend -->
+  <div class="project-category">
+    <h3>Frontend</h3>
+    <div class="project-grid">
+      <a href="/projects/react-dashboard" class="project-card">
+        <h4>React Data Dashboard</h4>
+        <p>Interactive charts and data visualization with Recharts.</p>
+        <ul class="tech-list">
+          <li>React</li>
+          <li>Recharts</li>
+          <li>Tailwind CSS</li>
+        </ul>
+      </a>
+      <a href="/projects/vue-interactive-page" class="project-card">
+        <h4>Vue Interactive Page</h4>
+        <p>Dynamic filtering and animations with Vue.js.</p>
+        <ul class="tech-list">
+          <li>Vue.js</li>
+          <li>Vuex</li>
+          <li>CSS Animations</li>
+        </ul>
+      </a>
+    </div>
+  </div>
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1) 애니메이션을 줄 요소를 정확히 골라냅니다.
+    //    예: project-category 전체 혹은 project-card 개별
+    const boxes = document.querySelectorAll('.project-category');
+    
+    // 2) IntersectionObserver 생성 (옵션은 필요에 따라 조정)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          // 한 번만 보이고 싶으면 unobserve 해도 좋습니다.
+          // observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1   // 요소가 10% 보일 때 콜백 호출
+    });
+    
+    // 3) 초기 스타일 및 관찰 등록
+    boxes.forEach(box => {
+      box.style.opacity = 0;
+      box.style.transition = 'opacity 1s ease-in-out';
+      observer.observe(box);
+    });
+  });
+
+
+</script>
+</section>
 {% endblock %}

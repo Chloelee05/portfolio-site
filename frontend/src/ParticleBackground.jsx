@@ -4,7 +4,7 @@ import { loadFull } from 'tsparticles';
 
 const particleOptions = {
   fullScreen: { enable: true, zIndex: -1 },
-  background: { color: { value: '#FFD1DC' } },
+  background: { color: { value: '#78A8D1' } },
   particles: {
     number: { value: 200, density: { enable: true, area: 1200 } },
     color: { value: '#ffffff' },

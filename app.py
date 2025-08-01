@@ -17,6 +17,9 @@ TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
+        print("▶ TELEGRAM_TOKEN:", TELEGRAM_TOKEN)
+        print("▶ CHAT_ID       :", TELEGRAM_CHAT_ID)
+
         name     = request.form['name']
         email    = request.form['email']
         phone    = request.form['phone']
@@ -45,6 +48,9 @@ def contact():
             'text': text,
             'parse_mode': 'HTML'
         })
+        
+        print("▶ STATUS:", resp.status_code)
+        print("▶ RESPONSE BODY:", resp.text)
         
         # 3) 첨부파일이 있으면 sendDocument 로 전송
         if attachment and attachment.filename:
@@ -78,6 +84,11 @@ def projects():
 @app.route('/resume')
 def resume():
     return render_template('resume.html')
+
+@app.route('/projects/<slug>')
+def project_detail(slug):
+    # slug에 맞는 템플릿이 templates/projects/{slug}.html 여야 함
+    return render_template(f'projects/{slug}.html')
 
 
 if __name__ == '__main__':

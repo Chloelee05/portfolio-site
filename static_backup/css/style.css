@@ -11,13 +11,13 @@ html, body {
 /* 타이포그래피 */
 body {
   font-family: 'Inter', sans-serif;  /* 모던한 본문 */
-  color: #333;
+  color: #ffffff;
   line-height: 1.6;
 }
 h1, h2, h3 {
   font-family: 'Playfair Display', serif; /* 클래식한 제목 */
   margin-bottom: 0.5rem;
-  color: #111;
+  color: #ffffff;
 }
 
 /* 헤더 */
@@ -28,7 +28,7 @@ h1, h2, h3 {
 }
 .site-header a {
   text-decoration: none;
-  color: #111;
+  color: #ffffff;
   margin-right: 1.5rem;
 }
 

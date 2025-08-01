@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automised Stock Analysis Software</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset and base styling */
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Manrope', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 0;
+    }
+    /* Container for central content */
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background: #fff;
+      padding: 2rem;
+      margin: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    /* Main title */
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      color: #304674;
+    }
+    /* Subtitle under title */
+    p.subtitle {
+      font-size: 1.125rem;
+      color: #666;
+      margin-bottom: 2rem;
+    }
+    /* Each documentation section */
+    .section {
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+    /* Section headings */
+    .section h2 {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      position: relative;
+      display: inline-block;
+      color: #304674;
+    }
+    .section h2::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 3px;
+      background: #304674;
+      margin-top: 0.25rem;
+      border-radius: 2px;
+    }
+    /* Code blocks styling */
+    pre {
+      background: #f0f0f0;
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 0.875rem;
+    }
+    code {
+      font-family: Consolas, 'Courier New', monospace;
+      color: #c7254e;
+      background: #f9f2f4;
+      padding: 0 4px;
+      border-radius: 4px;
+    }
+    /* Tag list (Tech Stack) */
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .tech-stack .tag {
+      background: #f0f0f0;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #304674;
+    }
+    /* Placeholder styling */
+    .placeholder {
+      background-color: #eef3f7;
+      border: 1px dashed #ccc;
+      padding: 1rem;
+      color: #999;
+      font-style: italic;
+      margin: 1rem 0;
+    }
+    /* Screenshot preview */
+    img.sample-image {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border: 1px solid #ddd;
+    }
+    /* Footer styling */
+    footer {
+      margin: 2rem 0;
+      font-size: 0.875rem;
+      color: #999;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Title and subtitle -->
+    <h1>Automised Stock Cases Scanner</h1>
+    <p class="subtitle">Interactive, pattern-based scanning of Korean stocks with GUI controls, chart outputs, and Excel export for deep analysis.</p>
+
+    <!-- Features overview -->
+    <div class="section">
+      <h2>Features</h2>
+      <ul>
+        <li><strong>PySide6 GUI:</strong> Users configure <code>base_date</code>, <code>start_date</code>, <code>end_date</code> and pattern thresholds, then monitor progress in real-time.</li>
+        <li><strong>Pattern Scan:</strong> Implements five distinct technical patterns (1–5) to flag bullish setups automatically.</li>
+        <li><strong>Data Pipeline:</strong> Fetch OHLCV and market cap via <code>pykrx</code>, normalize with <code>pandas</code>, and compute derived fields.</li>
+        <li><strong>Charting:</strong> Generate annotated candlestick plots using <code>mplfinance</code> &amp; <code>matplotlib</code>, marking match dates.</li>
+        <li><strong>Batch &amp; Export:</strong> Scan all KOSPI/KOSDAQ tickers in one go, then export parameters, match lists, and embedded chart images to an Excel workbook via <code>xlsxwriter</code>.</li>
+      </ul>
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="section">
+      <h2>Tech Stack</h2>
+      <div class="tech-stack">
+        <span class="tag">Python</span>
+        <span class="tag">PySide6</span>
+        <span class="tag">pykrx</span>
+        <span class="tag">pandas</span>
+        <span class="tag">NumPy</span>
+        <span class="tag">Matplotlib</span>
+        <span class="tag">Mplfinance</span>
+        <span class="tag">XlsxWriter</span>
+        <span class="tag">Pillow (PIL)</span>
+      </div>
+    </div>
+
+    <!-- Introduction -->
+    <div class="section">
+      <h2>Introduction</h2>
+      <p>
+        This tool streamlines technical pattern detection on Korean equities. Through a clean GUI, users input date ranges and select which of the five patterns to run. The engine fetches data, evaluates each pattern against every trading day in the window, and compiles results—complete with annotated candlestick charts—into a structured Excel report.
+      </p>
+    </div>
+
+    <!-- Data Collection Details -->
+    <div class="section">
+      <h2>Data Collection: <code>fetch_ohlcv</code></h2>
+      <p>
+        <code>fetch_ohlcv(code, start, end)</code>:
+      </p>
+      <ul>
+        <li><strong>API Call:</strong>
+          <pre><code>raw = get_market_ohlcv_by_date(start, end, code)</code></pre>
+          Retrieves Korean-stock OHLCV data (columns in Hangul).</li>
+        <li><strong>Column Standardization:</strong>
+          <pre><code>df = raw.reset_index().rename(columns={
+    '날짜':'Date','시가':'Open','고가':'High',
+    '저가':'Low','종가':'Close','거래량':'Volume'
+})[['Date','Open','High','Low','Close','Volume']]</code></pre>
+        </li>
+        <li><strong>Turnover Calculation:</strong>
+          <pre><code>df['Turnover'] = df['Close'] * df['Volume']</code></pre>
+          Adds trading value (KRW) for advanced filtering.</li>
+        <li><strong>Cleanup:</strong> <code>df.dropna()</code> removes any incomplete rows, ensuring reliable downstream computations.</li>
+      </ul>
+    </div>
+
+    <!-- Analysis Methodology -->
+    <div class="section">
+      <h2>Analysis Methodology (Patterns 1–5)</h2>
+
+      <!-- Pattern 1 -->
+      <div class="section">
+        <h2>Case 1: Low-to-High Spike & Retracement</h2>
+        <p>
+          Flags when a stock surges from a historical low and then retraces enough to form a potential buy entry.
+        </p>
+        <p><strong>Params:</strong> <code>pct_up</code> (%) minimum rise, <code>pct_down</code> (%) minimum pullback.</p>
+        <ol>
+          <li><strong>Extract History:</strong>
+            <pre><code>hist = df[df['Date'] <= base_dt].sort_values('Date')</code></pre>
+          </li>
+          <li><strong>Limit-Up Exclusion:</strong> Skip if today’s rise ≥29%.<br>
+            <pre><code>rise_pct = (today.Close / prev.Close -1)*100
+if rise_pct >= 29: return False</code></pre>
+          </li>
+          <li><strong>Lowest Low:</strong>
+            <pre><code>low_price = hist['Low'].min()</code></pre>
+          </li>
+          <li><strong>High Spike:</strong>
+            <pre><code>post_low = hist.iloc[hist['Low'].idxmin():]
+high_price = post_low['High'].max()
+if (high_price/low_price -1)*100 < pct_up: return False</code></pre>
+          </li>
+          <li><strong>Retracement Check:</strong>
+            <pre><code>if (high_price - today.Low)/high_price*100 < pct_down: return False</code></pre>
+          </li>
+          <li><strong>Close Position:</strong>
+            <pre><code>threshold = high_price*(1 - pct_down/100)
+return today.Close < threshold</code></pre>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Pattern 2 -->
+      <div class="section">
+        <h2>Case 2: Recent Window Drop & Bounce</h2>
+        <p>
+          Detects a steep drop within the last <code>window</code> bars followed by a bullish candle.
+        </p>
+        <p><strong>Params:</strong> <code>window</code> (bars), <code>pct_drop</code> (%).</p>
+        <pre><code>window_df = hist.iloc[end_idx-window:end_idx]
+low_price = window_df['Low'].min()
+today = hist.iloc[end_idx]
+if (low_price - today.Low)/low_price*100 < pct_drop: return False
+if today.Close <= today.Open: return False
+return True</code></pre>
+      </div>
+
+      <!-- Pattern 3 -->
+      <div class="section">
+        <h2>Case 3: Two-Phase Surge & Correction</h2>
+        <p>
+          After a Pattern 1 trigger, looks for a second surge then pullback to capture a multi-phase setup.
+        </p>
+        <p><strong>Params:</strong> <code>p3_up</code> (%), <code>p3_down</code> (%).</p>
+        <pre><code>post = df[df.Date >= match1_date]
+low2 = post['Low'].min()
+post2 = post.loc[post['Low'].idxmin():]
+high2 = post2['High'].max()
+if (high2/low2 -1)*100 < p3_up: return False
+low3 = post2.loc[post2['High'].idxmax():]['Low'].min()
+if (high2 - low3)/high2*100 < p3_down: return False
+return today.Close > today.Open</code></pre>
+      </div>
+
+      <!-- Pattern 4 -->
+      <div class="section">
+        <h2>Case 4: Market Cap & Envelope Lower Band</h2>
+        <p>
+          Combines market cap filtering with envelope band breakdowns for value dips in large-cap names.
+        </p>
+        <p><strong>Params:</strong> <code>marketcap_trillion</code> (trillion KRW), <code>env=(period,k)</code> (%).</p>
+        <pre><code>mc = get_market_cap_by_date(...).iloc[-1,0]
+if mc < marketcap_trillion*1e12: return False
+df['MA'] = df['Close'].rolling(period).mean()
+df['Lower'] = df['MA']*(1 - k/100)
+return df.loc[df.Date==base_dt,'Close'].iloc[0] <= df.loc[df.Date==base_dt,'Lower'].iloc[0]</code></pre>
+      </div>
+
+      <!-- Pattern 5 -->
+      <div class="section">
+        <h2>Case 5: Turnover & Envelope Lower Band</h2>
+        <p>
+          Filters by daily turnover before applying the same envelope breakdown as Pattern 4.
+        </p>
+        <p><strong>Params:</strong> <code>turnover_100M</code> (100M KRW), <code>env=(period,k)</code> (%).</p>
+        <pre><code>if today.Turnover < turnover_100M*1e8: return False
+# Reuse envelope logic from Pattern 4
+df['MA'] = df['Close'].rolling(period).mean()
+df['Lower'] = df['MA']*(1 - k/100)
+return today.Close <= df.loc[df.Date==base_dt,'Lower'].iloc[0]</code></pre>
+      </div>
+    </div>
+
+    <!-- Chart Generation -->
+    <div class="section">
+      <h2>Chart Generation & Annotation</h2>
+      <p>
+        For each match, the system:
+      </p>
+      <ol>
+        <li>Loads full OHLCV into <code>ohlcv_df</code> indexed by Date.</li>
+        <li>Creates a candlestick chart via <code>mplfinance.plot(type='candle')</code>.</li>
+        <li>Annotates the match date with a red arrow marker:
+          <pre><code>ax.annotate('▼', xy=(match_date, price), xytext=(0,15), textcoords='offset points', color='red')</code></pre>
+        </li>
+        <li>Saves chart as PNG to a date-stamped folder for Excel embedding.</li>
+      </ol>
+    </div>
+
+    <!-- Excel Export -->
+    <div class="section">
+      <h2>Excel Report & Export</h2>
+      <p>
+        Uses <code>pandas.ExcelWriter(..., engine='xlsxwriter')</code> to build:
+      </p>
+      <ul>
+        <li><strong>Parameters Sheet:</strong> Lists all input values and timestamp.</li>
+        <li><strong>Pattern Sheets:</strong> Each pattern gets its own sheet with columns <code>Code, KorName, MatchDate</code>.</li>
+        <li><strong>Image Insertion:</strong> Embeds match PNGs into column C, adjusting row height &amp; column width based on PIL-obtained dimensions.</li>
+      </ul>
+    </div>
+
+    <!-- Results & Conclusions -->
+    <div class="section">
+      <h2>Results & Conclusions</h2>
+      <p>
+        By automating data fetch, pattern evaluation, charting, and report assembly, this software cuts manual screening time dramatically. Analysts can focus on refining strategy parameters and interpreting results, while expansions (e.g., add RSI, incorporate real-time feeds) remain straightforward within this modular framework.
+      </p>
+    </div>
+
+    <!-- Placeholder Screenshot Section -->
+    <div class="section">
+      <h2>Sample Screenshot</h2>
+      <img src="path/to/your-screenshot.png" alt="Project Screenshot" class="sample-image">
+      <div class="placeholder">[Replace with actual GUI &amp; Excel examples]</div>
+    </div>
+
+  </div>
+  <footer>© 2025 Your Name. All Rights Reserved.</footer>
+</body>
+</html>

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+
   <section class="contact">
     <form action="{{ url_for('contact') }}"
           method="POST"
@@ -10,7 +11,7 @@
       <!-- ───── 폼 설명 & Last update ───── -->
       <div class="form-note">
         📌 This form is still active.  
-        Last update: <strong>2025-07-03</strong><br>
+        Last update: <strong>2025-08-01</strong><br>
         You’ll hear back from me very quickly after sending your message.
       </div>
 
@@ -23,7 +24,13 @@
       <input type="email" id="email" name="email" placeholder="you@example.com" required>
 
       <label for="phone">Phone</label>
-      <input type="tel" id="phone" name="phone" placeholder="+65 1234 5678" required>
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        placeholder=" 1234 5678"
+        required
+      />
 
       <label for="company">Company</label>
       <input type="text" id="company" name="company" placeholder="Your Company / Organization">
@@ -35,7 +42,7 @@
       <textarea id="message" name="message" rows="6" placeholder="Write your message…" required></textarea>
 
       <div class="file-input-wrapper">
-        <label for="attachment" class="file-input-button">Upload file</label>
+        <label for="attachment" class="file-input-button">Upload File</label>
         <input type="file" id="attachment" name="attachment" accept=".pdf,.doc,.docx">
         <span id="file-name">No file chosen</span>
       </div>
@@ -57,13 +64,64 @@
         <li><strong>Location:</strong> Singapore</li>
       </ul>
     </div>
-
   </section>
 
-    <script>
-    document.getElementById('attachment').addEventListener('change', function(){
-      const name = this.files[0]?.name || 'No file chosen';
-      document.getElementById('file-name').textContent = name;
+
+
+  <!-- ─── 페이지 끝, DOMContentLoaded 안에서 스크립트 실행 ─── -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 1) 파일명 표시 리스너
+      const attachment = document.getElementById('attachment');
+      const fileNameSpan = document.getElementById('file-name');
+      if (attachment && fileNameSpan) {
+        attachment.addEventListener('change', function() {
+          fileNameSpan.textContent = this.files[0]?.name || 'No file chosen';
+        });
+      }
+
+      // 2) intl-tel-input 초기화 & full number 자동 입력
+      const phoneInput = document.querySelector('#phone');
+      if (phoneInput && window.intlTelInput) {
+        const iti = window.intlTelInput(phoneInput, {
+          initialCountry: 'sg',
+          separateDialCode: true,
+          autoHideDialCode: false,
+          preferredCountries: ['sg','us','kr'],
+          utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.min.js'
+        });
+
+        // 3) 폼 제출 전, full E.164 번호로 value 교체
+        const form = document.querySelector('.contact-form');
+        form.addEventListener('submit', function() {
+          // iti.getNumber()가 "+65xxxxxxxx" 형태를 반환
+          phoneInput.value = iti.getNumber();
+        });
+      }
     });
+
+    // ───────────────────────────────────────────────────
+    // 3) IntersectionObserver로 페이드인 애니메이션
+    const elems = document.querySelectorAll('.contact-form, .profile-details');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          observer.unobserve(entry.target);  // 한 번만 실행하려면 해제
+        }
+      });
+    }, {
+      threshold: 0.1  // 요소가 10% 보이면 콜백
+    });
+
+    elems.forEach(el => {
+      // 초기 상태: 투명, transition 설정
+      el.style.opacity = 0;
+      el.style.transition = 'opacity 1s ease-in-out';
+      observer.observe(el);
+    });
+
   </script>
+
+  
 {% endblock %}

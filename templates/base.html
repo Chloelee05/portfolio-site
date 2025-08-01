@@ -6,15 +6,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ title or "My Portfolio" }}</title>
 
+  <!-- intl-tel-input CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css"
+  />
+
+
   <!-- Google Fonts: 클래식→Serif, 모던→Sans-serif -->
   <link href="https://fonts.googleapis.com/css2?
       family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?
       family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome (아이콘용) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-...생략..."
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
 
   <!-- CSS -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.abc12345.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+
 </head>
 
 <body>
@@ -48,12 +66,74 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      &copy; 2025 Lee Chloe · All Rights Reserved.
+    <div class="container footer-grid">
+      <!-- 1) About -->
+      <div class="footer-col">
+        <h3 class="footer-title">ABOUT</h3>
+        <p class="footer-text">
+          Hello! I am Lee Hae Eun, currently pursuing Computer Science specialised in Cybersecurity & Big Data!
+        </p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <!-- 2) Services -->
+      <div class="footer-col">
+        <h3 class="footer-title">SERVICES</h3>
+        <ul class="footer-list">
+          <li><a href="#">Cybersecurity Red & Blue Team</a></li>
+          <li><a href="#">Data Analysis</a></li>
+          <li><a href="#">Web Crawling</a></li>
+          <li><a href="#">Web Developing & Design</a></li>
+          <li><a href="#">Backend Developing</a></li>
+        </ul>
+      </div>
+
+      <!-- 3) Tech Stack -->
+      <div class="footer-col">
+        <h3 class="footer-title">TECH STACK</h3>
+        <ul class="footer-list">
+          <li>Python & Java</li>
+          <li>R & Shiny</li>
+          <li>Flask & React</li>
+          <li>Three.js & JavaScript</li>
+          <li>Cybersecurity</li>
+        </ul>
+      </div>
+
+      <!-- 4) Newsletter -->
+      <div class="footer-col">
+        <h3 class="footer-title">NEWSLETTER</h3>
+        <p class="footer-text">
+          Get weekly updates on new projects and blog posts.
+        </p>
+        <form class="newsletter-form" action="#" method="post">
+          <input
+            type="email"
+            name="email"
+            placeholder="Your email address"
+            required
+          />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>
+        © 2025 Lee Chloe · All Rights Reserved.
+      </p>
     </div>
   </footer>
 
-  <script src="{{ url_for('static', filename='js/main.f082400e.js') }}"></script>
+
+  <!-- intl-tel-input JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.min.js"></script>
+
+  <script src="{{ url_for('static', filename='js/main.fbc660c5.js') }}"></script>
 
   <script>
   document.addEventListener('DOMContentLoaded', () => {
